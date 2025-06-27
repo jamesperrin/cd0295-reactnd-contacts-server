@@ -36,6 +36,10 @@ app.get("/contacts", async (req, res) => {
   })));
 });
 
+app.get('/contacts/:id', (req, res) => {
+  res.json(contacts.getById (req.token, req.params.id));
+});
+
 app.delete("/contacts/:id", (req, res) => {
   res.send(contacts.remove(req.token, req.params.id));
 });
@@ -55,7 +59,7 @@ app.post("/contacts", bodyParser.json(), (req, res) => {
 app.listen(config.port, async () => {
   try {
     console.log("Connection has been established successfully.");
-    console.log("Server listening on port %s, Ctrl+C to stop", config.port);
+    console.log("Server listening on port http://localhost:%s, Ctrl+C to stop", config.port);
   } catch (error) {
     console.error("Unable to establish the connection:", error);
   }
