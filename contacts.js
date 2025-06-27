@@ -41,6 +41,17 @@ const get = (token) => {
   return data
 }
 
+const getById = (token, id) => {
+  const data = get(token);
+  const contact = data.contacts.find((c) => c.id === id);
+
+  if (contact) {
+    return { contact };
+  }
+
+  return { message: 'No Contact found' };
+};
+
 const add = (token, contact) => {
   if (!contact.id) {
     contact.id = Math.random().toString(36).substr(-8)
@@ -64,6 +75,7 @@ const remove = (token, id) => {
 
 module.exports = {
   get,
+  getById,
   add,
   remove,
   defaultData
